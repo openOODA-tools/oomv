@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oomv-bin
+_pkgname=oomv
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Atomic directory and file mover across partitions with rollback on copy failure."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oomv"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oomv')
+conflicts=('oomv')
+source_x86_64=("${url}/releases/download/v${pkgver}/oomv-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oomv-linux-x86_64" "${pkgdir}/usr/bin/oomv"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oomv-uninstall"
+}
